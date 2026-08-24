@@ -1330,81 +1330,129 @@ figures/
 
 # 🧪 Hands-on Challenge 1
 
-Create the following three plots using the microbiological dataset.
+For this challenge, we will work with a **different microbiological dataset**.
+
+Instead of soil, treatment, moisture, and bacterial abundance, we will explore a simple bacterial growth experiment using:
+
+* Carbon source
+* Growth time
+* Optical density (`OD600`)
+* Viable cell count (`CFU_mL`)
+
+First, create the dataset manually:
+
+```r
+challenge_data <- data.frame(
+  Sample = c(
+    "G01", "G02", "G03",
+    "G04", "G05", "G06",
+    "G07", "G08", "G09",
+    "G10", "G11", "G12"
+  ),
+  Carbon_Source = c(
+    "Glucose", "Glucose", "Glucose",
+    "Glucose", "Glucose", "Glucose",
+    "Acetate", "Acetate", "Acetate",
+    "Acetate", "Acetate", "Acetate"
+  ),
+  Time_h = c(
+    0, 2, 4, 6, 8, 10,
+    0, 2, 4, 6, 8, 10
+  ),
+  OD600 = c(
+    0.05, 0.12, 0.31, 0.68, 1.12, 1.48,
+    0.05, 0.08, 0.15, 0.27, 0.44, 0.63
+  ),
+  CFU_mL = c(
+    1.2e6, 2.4e6, 6.8e6,
+    1.5e7, 3.1e7, 4.2e7,
+    1.1e6, 1.6e6, 3.2e6,
+    6.1e6, 1.1e7, 1.8e7
+  )
+)
+
+challenge_data
+```
 
 ---
 
-## Challenge A — Boxplot with Individual Samples
+## Challenge A — Growth Curve
+
+Plot bacterial growth over time.
 
 ```r
 ggplot(
-  data,
+  challenge_data,
   aes(
-    x = Soil,
-    y = Bacterial_Abundance,
-    fill = Treatment
+    x = Time_h,
+    y = OD600,
+    color = Carbon_Source
+  )
+) +
+  geom_point(
+    size = 3
+  ) +
+  geom_line() +
+  labs(
+    title = "Bacterial Growth Under Different Carbon Sources",
+    x = "Time (hours)",
+    y = "Optical Density (OD600)"
+  ) +
+  theme_classic()
+```
+
+Ask:
+
+> **Which carbon source appears to support faster bacterial growth?**
+
+---
+
+## Challenge B — CFU Distribution
+
+Compare viable bacterial counts between carbon sources.
+
+```r
+ggplot(
+  challenge_data,
+  aes(
+    x = Carbon_Source,
+    y = CFU_mL,
+    fill = Carbon_Source
   )
 ) +
   geom_boxplot(
     alpha = 0.7
   ) +
   geom_jitter(
-    width = 0.15,
+    width = 0.12,
     size = 2
   ) +
+  scale_y_log10() +
   labs(
-    title = "Bacterial Abundance Across Soil Types",
-    x = "Soil Type",
-    y = "Bacterial Abundance"
+    title = "Viable Bacterial Counts",
+    x = "Carbon Source",
+    y = "CFU/mL"
   ) +
   theme_classic()
 ```
 
 Ask:
 
-> **Does bacterial abundance appear to differ between Mineral and Peat soils?**
+> **Which carbon source is associated with higher viable bacterial counts?**
 
 ---
 
-## Challenge B — Histogram by Treatment
+## Challenge C — OD600 and CFU Relationship
+
+Explore whether optical density reflects viable cell numbers.
 
 ```r
 ggplot(
-  data,
+  challenge_data,
   aes(
-    x = Bacterial_Abundance,
-    fill = Treatment
-  )
-) +
-  geom_histogram(
-    bins = 4,
-    alpha = 0.6,
-    position = "identity"
-  ) +
-  labs(
-    title = "Distribution of Bacterial Abundance",
-    x = "Bacterial Abundance",
-    y = "Number of Samples"
-  ) +
-  theme_classic()
-```
-
-Ask:
-
-> **Do the Control and Treatment samples appear to have different distributions of bacterial abundance?**
-
----
-
-## Challenge C — Scatter Plot with Treatment and Soil
-
-```r
-ggplot(
-  data,
-  aes(
-    x = Moisture,
-    y = Bacterial_Abundance,
-    color = Treatment,
-    shape = Soil
+    x = OD600,
+    y = CFU_mL,
+    color = Carbon_Source
   )
 ) +
   geom_point(
@@ -1414,17 +1462,18 @@ ggplot(
     method = "lm",
     se = FALSE
   ) +
+  scale_y_log10() +
   labs(
-    title = "Relationship Between Soil Moisture and Bacterial Abundance",
-    x = "Soil Moisture (%)",
-    y = "Bacterial Abundance"
+    title = "Relationship Between OD600 and Viable Cell Count",
+    x = "Optical Density (OD600)",
+    y = "CFU/mL"
   ) +
   theme_classic()
 ```
 
 Ask:
 
-> **Does bacterial abundance appear to change with soil moisture, and does the pattern differ between treatments or soil types?**
+> **Does OD600 appear to be associated with viable bacterial cell numbers?**
 
 ---
 
@@ -1432,13 +1481,14 @@ Ask:
 
 After creating all three plots, discuss:
 
-1. **Which soil type appears to have higher bacterial abundance?**
-2. **Does the Treatment group appear different from the Control group?**
-3. **Does soil moisture appear to be associated with bacterial abundance?**
-4. **Which plot provides the clearest answer to each question?**
+1. **Which carbon source appears to support faster growth?**
+2. **Which carbon source has higher viable cell counts?**
+3. **Does OD600 appear to increase with CFU/mL?**
+4. **Why might OD600 and CFU/mL not always show exactly the same pattern?**
+5. **Which plot best describes bacterial growth over time?**
 
-> 💡 **Remember:** A visual pattern is an observation, not proof of a biological effect. Statistical testing is needed to evaluate whether an observed difference or relationship has statistical support.
-
+> 💡 **Remember:** OD600 measures optical density, whereas CFU/mL estimates viable culturable cells. These measurements describe different aspects of bacterial growth and may not always change proportionally.
+> 
 ---
 
 # 🧠 4.11 Choosing the Right Plot
