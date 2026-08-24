@@ -1,0 +1,7 @@
+"Sample","Treatment","Soil","pH","Moisture","Bacterial_Abundance"
+"S01","Control","Mineral",5.2,35.4,1250
+"S02","Control","Mineral",5.4,37.1,1430
+"S03","Control","Peat",4.8,62.3,980
+"S04","Treatment","Mineral",6.1,40.2,1890
+"S05","Treatment","Peat",5,65.1,2100
+"S06","Treatment","Peat",5.3,63.8,2250
