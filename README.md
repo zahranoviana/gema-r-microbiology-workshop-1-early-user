@@ -1330,53 +1330,72 @@ figures/
 
 # 🧪 Hands-on Challenge 1
 
-Create the following three plots.
+Create the following three plots using the microbiological dataset.
 
-## Challenge A — Boxplot
+---
+
+## Challenge A — Boxplot with Individual Samples
 
 ```r
 ggplot(
   data,
   aes(
-    x = Treatment,
-    y = Bacterial_Abundance
+    x = Soil,
+    y = Bacterial_Abundance,
+    fill = Treatment
   )
 ) +
-  geom_boxplot() +
+  geom_boxplot(
+    alpha = 0.7
+  ) +
   geom_jitter(
-    width = 0.15
+    width = 0.15,
+    size = 2
+  ) +
+  labs(
+    title = "Bacterial Abundance Across Soil Types",
+    x = "Soil Type",
+    y = "Bacterial Abundance"
   ) +
   theme_classic()
 ```
 
 Ask:
 
-> **Which treatment appears to have higher bacterial abundance?**
+> **Does bacterial abundance appear to differ between Mineral and Peat soils?**
 
 ---
 
-## Challenge B — Histogram
+## Challenge B — Histogram by Treatment
 
 ```r
 ggplot(
   data,
   aes(
-    x = Bacterial_Abundance
+    x = Bacterial_Abundance,
+    fill = Treatment
   )
 ) +
   geom_histogram(
-    bins = 4
+    bins = 4,
+    alpha = 0.6,
+    position = "identity"
+  ) +
+  labs(
+    title = "Distribution of Bacterial Abundance",
+    x = "Bacterial Abundance",
+    y = "Number of Samples"
   ) +
   theme_classic()
 ```
 
 Ask:
 
-> **How are the bacterial abundance values distributed?**
+> **Do the Control and Treatment samples appear to have different distributions of bacterial abundance?**
 
 ---
 
-## Challenge C — Scatter Plot
+## Challenge C — Scatter Plot with Treatment and Soil
 
 ```r
 ggplot(
@@ -1384,16 +1403,41 @@ ggplot(
   aes(
     x = Moisture,
     y = Bacterial_Abundance,
-    color = Treatment
+    color = Treatment,
+    shape = Soil
   )
 ) +
-  geom_point() +
+  geom_point(
+    size = 3
+  ) +
+  geom_smooth(
+    method = "lm",
+    se = FALSE
+  ) +
+  labs(
+    title = "Relationship Between Soil Moisture and Bacterial Abundance",
+    x = "Soil Moisture (%)",
+    y = "Bacterial Abundance"
+  ) +
   theme_classic()
 ```
 
 Ask:
 
-> **Do moisture and bacterial abundance appear to be related?**
+> **Does bacterial abundance appear to change with soil moisture, and does the pattern differ between treatments or soil types?**
+
+---
+
+## 🧠 Challenge Questions
+
+After creating all three plots, discuss:
+
+1. **Which soil type appears to have higher bacterial abundance?**
+2. **Does the Treatment group appear different from the Control group?**
+3. **Does soil moisture appear to be associated with bacterial abundance?**
+4. **Which plot provides the clearest answer to each question?**
+
+> 💡 **Remember:** A visual pattern is an observation, not proof of a biological effect. Statistical testing is needed to evaluate whether an observed difference or relationship has statistical support.
 
 ---
 
