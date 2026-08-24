@@ -2,7 +2,7 @@
 
 ## 📅 Date: August 27th, 2026
 
-## ⏰ Time: 08:45–11:30 WIB
+## ⏰ Time: 08:30–11:30 WIB
 
 ## 👨‍🏫 Instructors
 
@@ -748,57 +748,7 @@ This allows us to ask biological questions about specific groups of samples.
 
 ---
 
-# 📊 2.10 Summarizing by Treatment
-
-Now we want to answer:
-
-> **What is the average bacterial abundance in each treatment?**
-
-Run:
-
-```r
-data %>%
-  group_by(Treatment) %>%
-  summarise(
-    mean_abundance = mean(
-      Bacterial_Abundance,
-      na.rm = TRUE
-    )
-  )
-```
-
-We can also calculate standard deviation:
-
-```r
-data %>%
-  group_by(Treatment) %>%
-  summarise(
-    mean_abundance = mean(
-      Bacterial_Abundance,
-      na.rm = TRUE
-    ),
-    sd_abundance = sd(
-      Bacterial_Abundance,
-      na.rm = TRUE
-    )
-  )
-```
-
-Now we have:
-
-```text
-Treatment
-    ↓
-Group samples
-    ↓
-Calculate mean
-    ↓
-Calculate variation
-```
-
----
-
-# 🧠 2.11 What Did We Learn?
+# 🧠 2.10 What Did We Learn?
 
 We have learned how to:
 
@@ -818,30 +768,6 @@ These are some of the most fundamental operations in data analysis.
 
 ---
 
-# 🧪 Hands-on Challenge 1
-
-Try to answer:
-
-> **What is the average bacterial abundance in the Control and Treatment groups?**
-
-Use:
-
-```r
-data %>%
-  group_by(Treatment) %>%
-  summarise(
-    mean_abundance = mean(
-      Bacterial_Abundance,
-      na.rm = TRUE
-    )
-  )
-```
-
-Then ask yourself:
-
-> **Which group has the higher average bacterial abundance?**
-
----
 
 # 🚀 Section 2 Complete
 
