@@ -571,7 +571,7 @@ Alternative script:
 ```r
 # Create microbiological sample data
 
-microbiology_samples <- data.frame(
+microbiology_data <- data.frame(
   Sample = c("S01", "S02", "S03", "S04", "S05", "S06"),
   Treatment = c(
     "Control",
@@ -602,11 +602,11 @@ microbiology_samples <- data.frame(
 )
 
 # View the data
-microbiology_samples
+microbiology_data
 
 # Save as CSV
 write.csv(
-  microbiology_samples,
+  microbiology_data,
   "data/microbiology_data.csv",
   row.names = FALSE
 )
