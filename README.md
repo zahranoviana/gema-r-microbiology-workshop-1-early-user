@@ -24,31 +24,27 @@ From laboratory measurements and microbial abundance data to microbiome and whol
 
 However, learning R does not need to begin with complicated programming.
 
-In this workshop, we will learn R through a simple microbiological dataset and one central biological question:
-
-> **Does treatment appear to affect bacterial abundance?**
-
-We will follow a simple workflow:
-
-```text
-Biological Question
-        ↓
-       Data
-        ↓
-   Inspect Data
-        ↓
-  Explore Data
-        ↓
-   Visualize Data
-        ↓
- Statistical Test
-        ↓
-Biological Interpretation
-```
+In this workshop, we will learn R through microbiological datasets and biological questions.
 
 The goal is **not** to memorize many R commands.
 
 Instead, we want participants to understand how R can help answer biological questions.
+
+We will follow a simple workflow:
+
+    Biological Question
+            ↓
+           Data
+            ↓
+       Inspect Data
+            ↓
+      Explore Data
+            ↓
+       Visualize Data
+            ↓
+     Statistical Test
+            ↓
+    Biological Interpretation
 
 ---
 
@@ -70,15 +66,15 @@ By the end of this workshop, participants should be able to:
 
 # ⏱️ Workshop Schedule
 
-| Time        | Session                              | Duration |
-| ----------- | ------------------------------------ | -------: |
-| 08:45–09:00 | 1. Getting Started with R            |   15 min |
-| 09:00–09:35 | 2. Working with Microbiological Data |   35 min |
-| 09:35–10:00 | 3. Exploring Biological Data         |   25 min |
-| 10:00–10:10 | ☕ Break                              |   10 min |
-| 10:10–10:55 | 4. Data Visualization with `ggplot2` |   45 min |
-| 10:55–11:15 | 5. Statistical Testing               |   20 min |
-| 11:15–11:30 | 6. Biological Interpretation         |   15 min |
+| Time | Session | Duration |
+| --- | --- | ---: |
+| 08:45–09:00 | 1. Getting Started with R | 15 min |
+| 09:00–09:35 | 2. Working with Microbiological Data | 35 min |
+| 09:35–10:00 | 3. Exploring Biological Data | 25 min |
+| 10:00–10:10 | ☕ Break | 10 min |
+| 10:10–10:55 | 4. Data Visualization with `ggplot2` | 45 min |
+| 10:55–11:15 | 5. Statistical Testing | 20 min |
+| 11:15–11:30 | 6. Biological Interpretation | 15 min |
 
 ### Total Workshop Time
 
@@ -90,23 +86,21 @@ By the end of this workshop, participants should be able to:
 
 Throughout the workshop, we will work through the following workflow:
 
-```text
-                 BIOLOGICAL QUESTION
-                         ↓
-                       DATA
-                         ↓
-                  IMPORT DATA
-                         ↓
-                  INSPECT DATA
-                         ↓
-                  EXPLORE DATA
-                         ↓
-                 VISUALIZE DATA
-                         ↓
-                 STATISTICAL TEST
-                         ↓
-             BIOLOGICAL INTERPRETATION
-```
+    BIOLOGICAL QUESTION
+             ↓
+           DATA
+             ↓
+       IMPORT DATA
+             ↓
+       INSPECT DATA
+             ↓
+       EXPLORE DATA
+             ↓
+      VISUALIZE DATA
+             ↓
+      STATISTICAL TEST
+             ↓
+   BIOLOGICAL INTERPRETATION
 
 ---
 
@@ -126,21 +120,17 @@ Choose the appropriate installer for your operating system.
 
 Select:
 
-```text
-Download R for Windows
-        ↓
-base
-        ↓
-Download the latest R installer
-```
+    Download R for Windows
+            ↓
+          base
+            ↓
+    Download the latest R installer
 
 ### macOS
 
 Select:
 
-```text
-Download R for macOS
-```
+    Download R for macOS
 
 Download the appropriate `.pkg` installer.
 
@@ -148,9 +138,7 @@ Download the appropriate `.pkg` installer.
 
 Select:
 
-```text
-Download R for Linux
-```
+    Download R for Linux
 
 Choose your Linux distribution and follow the installation instructions.
 
@@ -176,13 +164,11 @@ Install RStudio using the default settings.
 
 The order is:
 
-```text
-Install R
-   ↓
-Install RStudio
-   ↓
-Open RStudio
-```
+    Install R
+       ↓
+    Install RStudio
+       ↓
+    Open RStudio
 
 ---
 
@@ -192,19 +178,17 @@ Before the workshop, download the workshop repository/materials.
 
 The project should contain:
 
-```text
-R_Microbiology_Workshop/
-│
-├── data/
-│
-├── scripts/
-│
-├── figures/
-│
-└── results/
-```
+    R_Microbiology_Workshop/
+    │
+    ├── data/
+    │
+    ├── scripts/
+    │
+    ├── figures/
+    │
+    └── results/
 
-The `data/` directory will contain the microbiological dataset used during the workshop.
+The `data/` directory will contain the microbiological datasets used during the workshop.
 
 ---
 
@@ -214,15 +198,11 @@ We will use the `tidyverse` collection of R packages.
 
 Open RStudio and run:
 
-```r
-install.packages("tidyverse")
-```
+    install.packages("tidyverse")
 
 Then test the installation:
 
-```r
-library(tidyverse)
-```
+    library(tidyverse)
 
 If no error appears, the package is ready.
 
@@ -238,21 +218,15 @@ Open RStudio.
 
 In the Console, run:
 
-```r
-1 + 1
-```
+    1 + 1
 
 You should see:
 
-```text
-[1] 2
-```
+    [1] 2
 
 Then run:
 
-```r
-library(tidyverse)
-```
+    library(tidyverse)
 
 If both commands work, your computer is ready for the workshop.
 
@@ -270,18 +244,16 @@ Now that R and RStudio are ready, let's start using R.
 
 When you open RStudio, you will usually see several panels:
 
-```text
-┌─────────────────────┬──────────────────────┐
-│                     │                      │
-│   Source / Editor   │ Environment / Files  │
-│                     │                      │
-│                     │                      │
-├─────────────────────┼──────────────────────┤
-│                     │                      │
-│      Console        │     Plots / Help     │
-│                     │                      │
-└─────────────────────┴──────────────────────┘
-```
+    ┌─────────────────────┬──────────────────────┐
+    │                     │                      │
+    │   Source / Editor   │ Environment / Files  │
+    │                     │                      │
+    │                     │                      │
+    ├─────────────────────┼──────────────────────┤
+    │                     │                      │
+    │      Console        │     Plots / Help     │
+    │                     │                      │
+    └─────────────────────┴──────────────────────┘
 
 The most important panels for today are:
 
@@ -298,33 +270,27 @@ An R Project keeps our analysis organized.
 
 In RStudio, select:
 
-```text
-File
-  ↓
-New Project
-  ↓
-New Directory
-  ↓
-New Project
-```
+    File
+      ↓
+    New Project
+      ↓
+    New Directory
+      ↓
+    New Project
 
 Name the project:
 
-```text
-R_Microbiology_Workshop
-```
+    R_Microbiology_Workshop
 
 Choose a convenient location and create the project.
 
 Our project will contain:
 
-```text
-R_Microbiology_Workshop/
-├── data/
-├── scripts/
-├── figures/
-└── results/
-```
+    R_Microbiology_Workshop/
+    ├── data/
+    ├── scripts/
+    ├── figures/
+    └── results/
 
 > 💡 An R Project helps R know where your files are located and keeps your analysis organized.
 
@@ -334,25 +300,19 @@ R_Microbiology_Workshop/
 
 In RStudio:
 
-```text
-File
-  ↓
-New File
-  ↓
-R Script
-```
+    File
+      ↓
+    New File
+      ↓
+    R Script
 
 Save the script as:
 
-```text
-01_getting_started.R
-```
+    01_getting_started.R
 
 Save it inside:
 
-```text
-scripts/
-```
+    scripts/
 
 ---
 
@@ -360,27 +320,19 @@ scripts/
 
 Run:
 
-```r
-1 + 1
-```
+    1 + 1
 
 You should get:
 
-```text
-[1] 2
-```
+    [1] 2
 
 Try:
 
-```r
-10 * 5
-```
+    10 * 5
 
 and:
 
-```r
-100 / 4
-```
+    100 / 4
 
 R can perform calculations just like a calculator.
 
@@ -392,39 +344,31 @@ R becomes much more useful when we store information in objects.
 
 For example:
 
-```r
-sample_id <- "S01"
+    sample_id <- "S01"
 
-treatment <- "Control"
+    treatment <- "Control"
 
-abundance <- 1250
-```
+    abundance <- 1250
 
 We can inspect the objects:
 
-```r
-sample_id
+    sample_id
 
-treatment
+    treatment
 
-abundance
-```
+    abundance
 
 The result should look like:
 
-```text
-[1] "S01"
+    [1] "S01"
 
-[1] "Control"
+    [1] "Control"
 
-[1] 1250
-```
+    [1] 1250
 
 The symbol:
 
-```text
-<-
-```
+    <-
 
 means:
 
@@ -432,17 +376,13 @@ means:
 
 For example:
 
-```r
-abundance <- 1250
-```
+    abundance <- 1250
 
 means:
 
-```text
-1250
-  ↓
-abundance
-```
+    1250
+      ↓
+    abundance
 
 ---
 
@@ -450,23 +390,19 @@ abundance
 
 Think about R like this:
 
-```text
-Biological information
-        ↓
-      Objects
-        ↓
-     Functions
-        ↓
-      Results
-```
+    Biological information
+            ↓
+          Objects
+            ↓
+         Functions
+            ↓
+          Results
 
 For example:
 
-```r
-abundance <- 1250
+    abundance <- 1250
 
-mean(abundance)
-```
+    mean(abundance)
 
 The object stores information.
 
@@ -484,7 +420,7 @@ You have now:
 * Run basic R commands
 * Created simple R objects
 
-Now let's work with an actual biological dataset.
+Now let's work with actual biological datasets.
 
 ---
 
@@ -513,30 +449,28 @@ Each **column** represents one variable.
 
 For example:
 
-| Sample | Treatment | Soil    |  pH | Moisture | Bacterial_Abundance |
-| ------ | --------- | ------- | --: | -------: | ------------------: |
-| S01    | Control   | Mineral | 5.2 |     35.4 |                1250 |
-| S02    | Control   | Mineral | 5.4 |     37.1 |                1430 |
-| S03    | Control   | Peat    | 4.8 |     62.3 |                 980 |
-| S04    | Treatment | Mineral | 6.1 |     40.2 |                1890 |
-| S05    | Treatment | Peat    | 5.0 |     65.1 |                2100 |
-| S06    | Treatment | Peat    | 5.3 |     63.8 |                2250 |
+| Sample | Treatment | Soil | pH | Moisture | Bacterial_Abundance |
+| --- | --- | --- | ---: | ---: | ---: |
+| S01 | Control | Mineral | 5.2 | 35.4 | 1250 |
+| S02 | Control | Mineral | 5.4 | 37.1 | 1430 |
+| S03 | Control | Peat | 4.8 | 62.3 | 980 |
+| S04 | Treatment | Mineral | 6.1 | 40.2 | 1890 |
+| S05 | Treatment | Peat | 5.0 | 65.1 | 2100 |
+| S06 | Treatment | Peat | 5.3 | 63.8 | 2250 |
 
 We can think of the dataset as:
 
-```text
-Rows
- ↓
-Samples
+    Rows
+     ↓
+    Samples
 
-Columns
- ↓
-Variables
+    Columns
+     ↓
+    Variables
 
-Cells
- ↓
-Individual observations
-```
+    Cells
+     ↓
+    Individual observations
 
 ---
 
@@ -544,74 +478,71 @@ Individual observations
 
 Our CSV file is:
 
-```text
-microbiology_data.csv
-```
+    microbiology_data.csv
 
 It should be located inside:
 
-```text
-data/
-```
+    data/
 
 Import it using:
 
-```r
-data <- read.csv("data/microbiology_data.csv")
-```
+    data <- read.csv("data/microbiology_data.csv")
 
 The dataset is now stored in an R object called:
 
-```text
-data
-```
+    data
 
-Alternative script:
+### Alternative: Create the Dataset Manually
 
-```r
-# Create microbiological sample data
+If the CSV file is not available, we can create a small dataset directly in R:
 
-microbiology_data <- data.frame(
-  Sample = c("S01", "S02", "S03", "S04", "S05", "S06"),
-  Treatment = c(
-    "Control",
-    "Control",
-    "Control",
-    "Treatment",
-    "Treatment",
-    "Treatment"
-  ),
-  Soil = c(
-    "Mineral",
-    "Mineral",
-    "Peat",
-    "Mineral",
-    "Peat",
-    "Peat"
-  ),
-  pH = c(5.2, 5.4, 4.8, 6.1, 5.0, 5.3),
-  Moisture = c(35.4, 37.1, 62.3, 40.2, 65.1, 63.8),
-  Bacterial_Abundance = c(
-    1250,
-    1430,
-    980,
-    1890,
-    2100,
-    2250
-  )
-)
+    microbiology_data <- data.frame(
+      Sample = c(
+        "S01", "S02", "S03", "S04", "S05", "S06"
+      ),
+      Treatment = c(
+        "Control",
+        "Control",
+        "Control",
+        "Treatment",
+        "Treatment",
+        "Treatment"
+      ),
+      Soil = c(
+        "Mineral",
+        "Mineral",
+        "Peat",
+        "Mineral",
+        "Peat",
+        "Peat"
+      ),
+      pH = c(
+        5.2, 5.4, 4.8, 6.1, 5.0, 5.3
+      ),
+      Moisture = c(
+        35.4, 37.1, 62.3, 40.2, 65.1, 63.8
+      ),
+      Bacterial_Abundance = c(
+        1250,
+        1430,
+        980,
+        1890,
+        2100,
+        2250
+      )
+    )
 
-# View the data
-microbiology_data
+    microbiology_data
 
-# Save as CSV
-write.csv(
-  microbiology_data,
-  "data/microbiology_data.csv",
-  row.names = FALSE
-)
+    write.csv(
+      microbiology_data,
+      "data/microbiology_data.csv",
+      row.names = FALSE
+    )
 
-```
+For the remainder of this section, you can use:
+
+    data <- microbiology_data
 
 ---
 
@@ -619,15 +550,11 @@ write.csv(
 
 Let's see the first few rows:
 
-```r
-head(data)
-```
+    head(data)
 
 We can also see the last few rows:
 
-```r
-tail(data)
-```
+    tail(data)
 
 ---
 
@@ -635,29 +562,21 @@ tail(data)
 
 Run:
 
-```r
-dim(data)
-```
+    dim(data)
 
 The result tells us:
 
-```text
-number of rows
-number of columns
-```
+    number of rows
+    number of columns
 
 For example:
 
-```text
-[1] 20 6
-```
+    [1] 20 6
 
 means:
 
-```text
-20 samples
-6 variables
-```
+    20 samples
+    6 variables
 
 ---
 
@@ -665,20 +584,16 @@ means:
 
 Run:
 
-```r
-names(data)
-```
+    names(data)
 
 You should see something similar to:
 
-```text
-[1] "Sample"
-[2] "Treatment"
-[3] "Soil"
-[4] "pH"
-[5] "Moisture"
-[6] "Bacterial_Abundance"
-```
+    [1] "Sample"
+    [2] "Treatment"
+    [3] "Soil"
+    [4] "pH"
+    [5] "Moisture"
+    [6] "Bacterial_Abundance"
 
 ---
 
@@ -686,9 +601,7 @@ You should see something similar to:
 
 One of the most useful functions for beginners is:
 
-```r
-str(data)
-```
+    str(data)
 
 This tells us:
 
@@ -699,14 +612,12 @@ This tells us:
 
 For example:
 
-```text
-Sample               → character
-Treatment            → character
-Soil                 → character
-pH                   → numeric
-Moisture             → numeric
-Bacterial_Abundance  → numeric
-```
+    Sample               → character
+    Treatment            → character
+    Soil                 → character
+    pH                   → numeric
+    Moisture             → numeric
+    Bacterial_Abundance  → numeric
 
 ---
 
@@ -714,9 +625,7 @@ Bacterial_Abundance  → numeric
 
 Run:
 
-```r
-summary(data)
-```
+    summary(data)
 
 For numeric variables, R provides:
 
@@ -737,23 +646,17 @@ We can access a column using `$`.
 
 For example:
 
-```r
-data$Bacterial_Abundance
-```
+    data$Bacterial_Abundance
 
 This returns the bacterial abundance values.
 
 We can calculate the mean:
 
-```r
-mean(data$Bacterial_Abundance)
-```
+    mean(data$Bacterial_Abundance)
 
 And the standard deviation:
 
-```r
-sd(data$Bacterial_Abundance)
-```
+    sd(data$Bacterial_Abundance)
 
 ---
 
@@ -763,33 +666,25 @@ Now let's use `dplyr`.
 
 Make sure `tidyverse` is loaded:
 
-```r
-library(tidyverse)
-```
+    library(tidyverse)
 
 Suppose we only want the Treatment samples:
 
-```r
-data %>%
-  filter(Treatment == "Treatment")
-```
+    data %>%
+      filter(Treatment == "Treatment")
 
 We can also select Peat samples:
 
-```r
-data %>%
-  filter(Soil == "Peat")
-```
+    data %>%
+      filter(Soil == "Peat")
 
 We can combine conditions:
 
-```r
-data %>%
-  filter(
-    Treatment == "Treatment",
-    Soil == "Peat"
-  )
-```
+    data %>%
+      filter(
+        Treatment == "Treatment",
+        Soil == "Peat"
+      )
 
 This allows us to ask biological questions about specific groups of samples.
 
@@ -799,22 +694,19 @@ This allows us to ask biological questions about specific groups of samples.
 
 We have learned how to:
 
-```text
-Import
-  ↓
-Inspect
-  ↓
-Understand
-  ↓
-Filter
-  ↓
-Summarize
-```
+    Import
+      ↓
+    Inspect
+      ↓
+    Understand
+      ↓
+    Filter
+      ↓
+    Summarize
 
 These are some of the most fundamental operations in data analysis.
 
 ---
-
 
 # 🚀 Section 2 Complete
 
@@ -857,12 +749,10 @@ The mean is the average value.
 
 Run:
 
-```r
-mean(
-  data$Bacterial_Abundance,
-  na.rm = TRUE
-)
-```
+    mean(
+      data$Bacterial_Abundance,
+      na.rm = TRUE
+    )
 
 ---
 
@@ -872,12 +762,10 @@ The median is the middle value when observations are ordered.
 
 Run:
 
-```r
-median(
-  data$Bacterial_Abundance,
-  na.rm = TRUE
-)
-```
+    median(
+      data$Bacterial_Abundance,
+      na.rm = TRUE
+    )
 
 ---
 
@@ -887,24 +775,20 @@ The standard deviation describes variation around the mean.
 
 Run:
 
-```r
-sd(
-  data$Bacterial_Abundance,
-  na.rm = TRUE
-)
-```
+    sd(
+      data$Bacterial_Abundance,
+      na.rm = TRUE
+    )
 
 Think of it as:
 
-```text
-Mean
- ↓
-Typical value
+    Mean
+     ↓
+    Typical value
 
-SD
- ↓
-How variable are the observations?
-```
+    SD
+     ↓
+    How variable are the observations?
 
 ---
 
@@ -912,20 +796,18 @@ How variable are the observations?
 
 Let's calculate both mean and standard deviation:
 
-```r
-data %>%
-  group_by(Treatment) %>%
-  summarise(
-    mean_abundance = mean(
-      Bacterial_Abundance,
-      na.rm = TRUE
-    ),
-    sd_abundance = sd(
-      Bacterial_Abundance,
-      na.rm = TRUE
-    )
-  )
-```
+    data %>%
+      group_by(Treatment) %>%
+      summarise(
+        mean_abundance = mean(
+          Bacterial_Abundance,
+          na.rm = TRUE
+        ),
+        sd_abundance = sd(
+          Bacterial_Abundance,
+          na.rm = TRUE
+        )
+      )
 
 Now ask:
 
@@ -933,11 +815,9 @@ Now ask:
 
 Remember:
 
-```text
-Observed difference
-        ≠
-Statistical evidence
-```
+    Observed difference
+            ≠
+    Statistical evidence
 
 We are only describing what we see at this stage.
 
@@ -999,9 +879,7 @@ For this workshop, we will focus on three basic plots:
 
 Run:
 
-```r
-library(tidyverse)
-```
+    library(tidyverse)
 
 ---
 
@@ -1009,22 +887,18 @@ library(tidyverse)
 
 A basic plot looks like:
 
-```r
-ggplot(data, aes(...)) +
-  geom_*
-```
+    ggplot(data, aes(...)) +
+      geom_*
 
 Think of it as:
 
-```text
-Data
- ↓
-Variables
- ↓
-Geometry
- ↓
-Plot
-```
+    Data
+     ↓
+    Variables
+     ↓
+    Geometry
+     ↓
+    Plot
 
 ---
 
@@ -1032,16 +906,14 @@ Plot
 
 Our first visualization is a boxplot.
 
-```r
-ggplot(
-  data,
-  aes(
-    x = Treatment,
-    y = Bacterial_Abundance
-  )
-) +
-  geom_boxplot()
-```
+    ggplot(
+      data,
+      aes(
+        x = Treatment,
+        y = Bacterial_Abundance
+      )
+    ) +
+      geom_boxplot()
 
 The boxplot helps us see:
 
@@ -1058,33 +930,27 @@ For microbiological data, it is often useful to show the individual observations
 
 Add:
 
-```r
-geom_jitter()
-```
+    geom_jitter()
 
 Complete plot:
 
-```r
-ggplot(
-  data,
-  aes(
-    x = Treatment,
-    y = Bacterial_Abundance
-  )
-) +
-  geom_boxplot() +
-  geom_jitter(
-    width = 0.15
-  )
-```
+    ggplot(
+      data,
+      aes(
+        x = Treatment,
+        y = Bacterial_Abundance
+      )
+    ) +
+      geom_boxplot() +
+      geom_jitter(
+        width = 0.15
+      )
 
 Now we can see both:
 
-```text
-Summary of the distribution
-        +
-Individual samples
-```
+    Summary of the distribution
+            +
+    Individual samples
 
 This is particularly useful when the number of biological replicates is small.
 
@@ -1096,24 +962,22 @@ A scientific figure should be understandable.
 
 We can add labels:
 
-```r
-ggplot(
-  data,
-  aes(
-    x = Treatment,
-    y = Bacterial_Abundance
-  )
-) +
-  geom_boxplot() +
-  geom_jitter(
-    width = 0.15
-  ) +
-  labs(
-    title = "Bacterial Abundance by Treatment",
-    x = "Treatment",
-    y = "Bacterial Abundance"
-  )
-```
+    ggplot(
+      data,
+      aes(
+        x = Treatment,
+        y = Bacterial_Abundance
+      )
+    ) +
+      geom_boxplot() +
+      geom_jitter(
+        width = 0.15
+      ) +
+      labs(
+        title = "Bacterial Abundance by Treatment",
+        x = "Treatment",
+        y = "Bacterial Abundance"
+      )
 
 ---
 
@@ -1121,31 +985,27 @@ ggplot(
 
 We can use:
 
-```r
-theme_classic()
-```
+    theme_classic()
 
 Complete version:
 
-```r
-ggplot(
-  data,
-  aes(
-    x = Treatment,
-    y = Bacterial_Abundance
-  )
-) +
-  geom_boxplot() +
-  geom_jitter(
-    width = 0.15
-  ) +
-  labs(
-    title = "Bacterial Abundance by Treatment",
-    x = "Treatment",
-    y = "Bacterial Abundance"
-  ) +
-  theme_classic()
-```
+    ggplot(
+      data,
+      aes(
+        x = Treatment,
+        y = Bacterial_Abundance
+      )
+    ) +
+      geom_boxplot() +
+      geom_jitter(
+        width = 0.15
+      ) +
+      labs(
+        title = "Bacterial Abundance by Treatment",
+        x = "Treatment",
+        y = "Bacterial Abundance"
+      ) +
+      theme_classic()
 
 > 💡 Keep scientific figures simple.
 >
@@ -1157,18 +1017,16 @@ ggplot(
 
 A histogram shows how values are distributed.
 
-```r
-ggplot(
-  data,
-  aes(
-    x = Bacterial_Abundance
-  )
-) +
-  geom_histogram(
-    bins = 4
-  ) +
-  theme_classic()
-```
+    ggplot(
+      data,
+      aes(
+        x = Bacterial_Abundance
+      )
+    ) +
+      geom_histogram(
+        bins = 4
+      ) +
+      theme_classic()
 
 A histogram can help us see:
 
@@ -1187,17 +1045,15 @@ Now let's ask another question:
 
 Create a scatter plot:
 
-```r
-ggplot(
-  data,
-  aes(
-    x = Moisture,
-    y = Bacterial_Abundance
-  )
-) +
-  geom_point() +
-  theme_classic()
-```
+    ggplot(
+      data,
+      aes(
+        x = Moisture,
+        y = Bacterial_Abundance
+      )
+    ) +
+      geom_point() +
+      theme_classic()
 
 Each point represents one sample.
 
@@ -1207,34 +1063,30 @@ Each point represents one sample.
 
 We can use color to represent treatment.
 
-```r
-ggplot(
-  data,
-  aes(
-    x = Moisture,
-    y = Bacterial_Abundance,
-    color = Treatment
-  )
-) +
-  geom_point() +
-  theme_classic()
-```
+    ggplot(
+      data,
+      aes(
+        x = Moisture,
+        y = Bacterial_Abundance,
+        color = Treatment
+      )
+    ) +
+      geom_point() +
+      theme_classic()
 
 Now:
 
-```text
-x-axis
- ↓
-Moisture
+    x-axis
+     ↓
+    Moisture
 
-y-axis
- ↓
-Bacterial abundance
+    y-axis
+     ↓
+    Bacterial abundance
 
-color
- ↓
-Treatment
-```
+    color
+     ↓
+    Treatment
 
 This is one of the most useful ideas in `ggplot2`:
 
@@ -1246,33 +1098,29 @@ This is one of the most useful ideas in `ggplot2`:
 
 We can add a simple trend line:
 
-```r
-ggplot(
-  data,
-  aes(
-    x = Moisture,
-    y = Bacterial_Abundance
-  )
-) +
-  geom_point() +
-  geom_smooth(
-    method = "lm"
-  ) +
-  theme_classic()
-```
+    ggplot(
+      data,
+      aes(
+        x = Moisture,
+        y = Bacterial_Abundance
+      )
+    ) +
+      geom_point() +
+      geom_smooth(
+        method = "lm"
+      ) +
+      theme_classic()
 
 The line represents a fitted linear relationship.
 
 > ⚠️ A trend line does not prove causation.
 
-```
-model <- lm(
-  Bacterial_Abundance ~ Moisture,
-  data = data
-)
+    model <- lm(
+      Bacterial_Abundance ~ Moisture,
+      data = data
+    )
 
-summary(model)
-```
+    summary(model)
 
 ---
 
@@ -1282,60 +1130,54 @@ We can save a figure using `ggsave()`.
 
 First, store the plot:
 
-```r
-p <- ggplot(
-  data,
-  aes(
-    x = Treatment,
-    y = Bacterial_Abundance
-  )
-) +
-  geom_boxplot() +
-  geom_jitter(
-    width = 0.15
-  ) +
-  labs(
-    x = "Treatment",
-    y = "Bacterial Abundance"
-  ) +
-  theme_classic()
-```
+    p <- ggplot(
+      data,
+      aes(
+        x = Treatment,
+        y = Bacterial_Abundance
+      )
+    ) +
+      geom_boxplot() +
+      geom_jitter(
+        width = 0.15
+      ) +
+      labs(
+        x = "Treatment",
+        y = "Bacterial Abundance"
+      ) +
+      theme_classic()
 
 Display it:
 
-```r
-p
-```
+    p
 
 Save it:
 
-```r
-ggsave(
-  "figures/bacterial_abundance_treatment.png",
-  plot = p,
-  width = 6,
-  height = 4,
-  dpi = 300
-)
-```
+    ggsave(
+      "figures/bacterial_abundance_treatment.png",
+      plot = p,
+      width = 6,
+      height = 4,
+      dpi = 300
+    )
 
 The figure will be saved in:
 
-```text
-figures/
-└── bacterial_abundance_treatment.png
-```
+    figures/
+    └── bacterial_abundance_treatment.png
 
-# 🧠 4.11 Choosing the Right Plot
+---
+
+# 🧠 4.12 Choosing the Right Plot
 
 A useful rule of thumb:
 
-| Question                              | Plot            |
-| ------------------------------------- | --------------- |
-| What does the distribution look like? | Histogram       |
-| How do groups differ?                 | Boxplot         |
-| Where are individual observations?    | Jitter / points |
-| Are two continuous variables related? | Scatter plot    |
+| Question | Plot |
+| --- | --- |
+| What does the distribution look like? | Histogram |
+| How do groups differ? | Boxplot |
+| Where are individual observations? | Jitter / points |
+| Are two continuous variables related? | Scatter plot |
 
 The important question is not:
 
@@ -1386,21 +1228,17 @@ We can formulate:
 
 ### Null hypothesis
 
-```text
-H₀:
+    H₀:
 
-There is no difference in bacterial abundance
-between Control and Treatment.
-```
+    There is no difference in bacterial abundance
+    between Control and Treatment.
 
 ### Alternative hypothesis
 
-```text
-H₁:
+    H₁:
 
-Bacterial abundance differs between
-Control and Treatment.
-```
+    Bacterial abundance differs between
+    Control and Treatment.
 
 ---
 
@@ -1410,18 +1248,14 @@ Because we have two groups, we can introduce a simple t-test.
 
 Run:
 
-```r
-test_result <- t.test(
-  Bacterial_Abundance ~ Treatment,
-  data = data
-)
-```
+    test_result <- t.test(
+      Bacterial_Abundance ~ Treatment,
+      data = data
+    )
 
 Display the result:
 
-```r
-test_result
-```
+    test_result
 
 ---
 
@@ -1429,27 +1263,21 @@ test_result
 
 We can extract the p-value:
 
-```r
-test_result$p.value
-```
+    test_result$p.value
 
 A commonly used threshold is:
 
-```text
-p < 0.05
-```
+    p < 0.05
 
 For this introductory workshop, use the simplified interpretation:
 
-```text
-p < 0.05
-    ↓
-Evidence against the null hypothesis
+    p < 0.05
+        ↓
+    Evidence against the null hypothesis
 
-p ≥ 0.05
-    ↓
-Insufficient evidence to reject the null hypothesis
-```
+    p ≥ 0.05
+        ↓
+    Insufficient evidence to reject the null hypothesis
 
 > ⚠️ Important:
 >
@@ -1463,9 +1291,7 @@ Insufficient evidence to reject the null hypothesis
 
 Suppose we obtain:
 
-```text
-p = 0.001
-```
+    p = 0.001
 
 This provides strong statistical evidence against the null hypothesis.
 
@@ -1475,13 +1301,11 @@ But that does not automatically mean:
 
 We should consider:
 
-```text
-Statistical evidence
-        +
-Magnitude of difference
-        +
-Biological context
-```
+    Statistical evidence
+            +
+    Magnitude of difference
+            +
+    Biological context
 
 Similarly, a biologically interesting difference may not reach statistical significance if:
 
@@ -1497,14 +1321,14 @@ There are many other statistical approaches in microbiological research.
 
 For example:
 
-| Biological question                       | Possible method                |
-| ----------------------------------------- | ------------------------------ |
-| Compare two groups                        | t-test                         |
-| Compare more than two groups              | ANOVA                          |
-| Paired measurements                       | Paired t-test                  |
-| Relationship between continuous variables | Correlation                    |
-| Microbial community differences           | PERMANOVA                      |
-| Differential microbial taxa               | Differential abundance methods |
+| Biological question | Possible method |
+| --- | --- |
+| Compare two groups | t-test |
+| Compare more than two groups | ANOVA |
+| Paired measurements | Paired t-test |
+| Relationship between continuous variables | Correlation |
+| Microbial community differences | PERMANOVA |
+| Differential microbial taxa | Differential abundance methods |
 
 We will **not** cover these methods in detail today.
 
@@ -1514,20 +1338,15 @@ The important principle is:
 
 ---
 
-
 # 🚀 Section 5 Complete
 
 We have now moved from:
 
-```text
-"I can see a difference."
-```
+    "I can see a difference."
 
 to:
 
-```text
-"Is there statistical evidence for the difference?"
-```
+    "Is there statistical evidence for the difference?"
 
 Now we need to connect the result back to biology.
 
@@ -1599,11 +1418,9 @@ A useful principle is:
 
 If our scatter plot shows:
 
-```text
-Moisture ↑
-     ↓
-Bacterial abundance ↑
-```
+    Moisture ↑
+         ↓
+    Bacterial abundance ↑
 
 we might observe a positive association.
 
@@ -1645,17 +1462,15 @@ Make a conclusion that matches the evidence.
 
 The framework is:
 
-```text
-Observation
-    ↓
-Magnitude
-    ↓
-Statistical evidence
-    ↓
-Biological relevance
-    ↓
-Conclusion
-```
+    Observation
+        ↓
+    Magnitude
+        ↓
+    Statistical evidence
+        ↓
+    Biological relevance
+        ↓
+    Conclusion
 
 ---
 
@@ -1682,112 +1497,110 @@ Our biological question is:
 
 ---
 
-## 1. Create the Dataset
+# 1. Create the Dataset
 
 Create the dataset manually:
 
-```r
-challenge_data <- data.frame(
-  Isolate = c(
-    "ISO01", "ISO01", "ISO01", "ISO01",
-    "ISO01", "ISO01", "ISO01", "ISO01",
-    "ISO01", "ISO01", "ISO01", "ISO01",
-    "ISO02", "ISO02", "ISO02", "ISO02",
-    "ISO02", "ISO02", "ISO02", "ISO02",
-    "ISO02", "ISO02", "ISO02", "ISO02",
-    "ISO03", "ISO03", "ISO03", "ISO03",
-    "ISO03", "ISO03", "ISO03", "ISO03",
-    "ISO03", "ISO03", "ISO03", "ISO03"
-  ),
+    challenge_data <- data.frame(
+      Isolate = c(
+        "ISO01", "ISO01", "ISO01", "ISO01",
+        "ISO01", "ISO01", "ISO01", "ISO01",
+        "ISO01", "ISO01", "ISO01", "ISO01",
+        "ISO02", "ISO02", "ISO02", "ISO02",
+        "ISO02", "ISO02", "ISO02", "ISO02",
+        "ISO02", "ISO02", "ISO02", "ISO02",
+        "ISO03", "ISO03", "ISO03", "ISO03",
+        "ISO03", "ISO03", "ISO03", "ISO03",
+        "ISO03", "ISO03", "ISO03", "ISO03"
+      ),
 
-  Carbon_Source = c(
-    "Glucose", "Glucose", "Glucose", "Glucose",
-    "Acetate", "Acetate", "Acetate", "Acetate",
-    "Lactate", "Lactate", "Lactate", "Lactate",
-    "Glucose", "Glucose", "Glucose", "Glucose",
-    "Acetate", "Acetate", "Acetate", "Acetate",
-    "Lactate", "Lactate", "Lactate", "Lactate",
-    "Glucose", "Glucose", "Glucose", "Glucose",
-    "Acetate", "Acetate", "Acetate", "Acetate",
-    "Lactate", "Lactate", "Lactate", "Lactate"
-  ),
+      Carbon_Source = c(
+        "Glucose", "Glucose", "Glucose", "Glucose",
+        "Acetate", "Acetate", "Acetate", "Acetate",
+        "Lactate", "Lactate", "Lactate", "Lactate",
+        "Glucose", "Glucose", "Glucose", "Glucose",
+        "Acetate", "Acetate", "Acetate", "Acetate",
+        "Lactate", "Lactate", "Lactate", "Lactate",
+        "Glucose", "Glucose", "Glucose", "Glucose",
+        "Acetate", "Acetate", "Acetate", "Acetate",
+        "Lactate", "Lactate", "Lactate", "Lactate"
+      ),
 
-  Replicate = c(
-    1, 1, 1, 1,
-    1, 1, 1, 1,
-    1, 1, 1, 1,
-    1, 1, 1, 1,
-    1, 1, 1, 1,
-    1, 1, 1, 1,
-    1, 1, 1, 1,
-    1, 1, 1, 1,
-    1, 1, 1, 1
-  ),
+      Replicate = c(
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1,
+        1, 1, 1, 1
+      ),
 
-  Time_h = rep(
-    c(0, 4, 8, 12),
-    9
-  ),
+      Time_h = rep(
+        c(0, 4, 8, 12),
+        9
+      ),
 
-  OD600 = c(
-    0.05, 0.42, 0.91, 1.34,
-    0.05, 0.21, 0.48, 0.72,
-    0.05, 0.31, 0.66, 1.02,
+      OD600 = c(
+        0.05, 0.42, 0.91, 1.34,
+        0.05, 0.21, 0.48, 0.72,
+        0.05, 0.31, 0.66, 1.02,
 
-    0.05, 0.55, 1.18, 1.71,
-    0.05, 0.18, 0.39, 0.61,
-    0.05, 0.27, 0.58, 0.91,
+        0.05, 0.55, 1.18, 1.71,
+        0.05, 0.18, 0.39, 0.61,
+        0.05, 0.27, 0.58, 0.91,
 
-    0.05, 0.34, 0.73, 1.08,
-    0.05, 0.29, 0.55, 0.82,
-    0.05, 0.38, 0.81, 1.21
-  ),
+        0.05, 0.34, 0.73, 1.08,
+        0.05, 0.29, 0.55, 0.82,
+        0.05, 0.38, 0.81, 1.21
+      ),
 
-  CFU_mL = c(
-    1.1e6, 7.8e6, 2.4e7, 4.1e7,
-    1.0e6, 3.4e6, 9.2e6, 1.5e7,
-    1.2e6, 5.1e6, 1.7e7, 2.9e7,
+      CFU_mL = c(
+        1.1e6, 7.8e6, 2.4e7, 4.1e7,
+        1.0e6, 3.4e6, 9.2e6, 1.5e7,
+        1.2e6, 5.1e6, 1.7e7, 2.9e7,
 
-    1.0e6, 1.2e7, 3.8e7, 6.2e7,
-    1.1e6, 2.8e6, 7.4e6, 1.2e7,
-    1.0e6, 4.2e6, 1.5e7, 2.6e7,
+        1.0e6, 1.2e7, 3.8e7, 6.2e7,
+        1.1e6, 2.8e6, 7.4e6, 1.2e7,
+        1.0e6, 4.2e6, 1.5e7, 2.6e7,
 
-    1.2e6, 6.1e6, 1.9e7, 3.2e7,
-    1.1e6, 4.8e6, 1.3e7, 2.1e7,
-    1.0e6, 6.7e6, 2.1e7, 3.5e7
-  ),
+        1.2e6, 6.1e6, 1.9e7, 3.2e7,
+        1.1e6, 4.8e6, 1.3e7, 2.1e7,
+        1.0e6, 6.7e6, 2.1e7, 3.5e7
+      ),
 
-  pH = c(
-    7.00, 6.82, 6.51, 6.23,
-    7.00, 6.91, 6.79, 6.68,
-    7.00, 6.87, 6.61, 6.39,
+      pH = c(
+        7.00, 6.82, 6.51, 6.23,
+        7.00, 6.91, 6.79, 6.68,
+        7.00, 6.87, 6.61, 6.39,
 
-    7.00, 6.74, 6.29, 5.94,
-    7.00, 6.93, 6.84, 6.75,
-    7.00, 6.90, 6.67, 6.43,
+        7.00, 6.74, 6.29, 5.94,
+        7.00, 6.93, 6.84, 6.75,
+        7.00, 6.90, 6.67, 6.43,
 
-    7.00, 6.85, 6.55, 6.30,
-    7.00, 6.89, 6.72, 6.57,
-    7.00, 6.81, 6.48, 6.17
-  ),
+        7.00, 6.85, 6.55, 6.30,
+        7.00, 6.89, 6.72, 6.57,
+        7.00, 6.81, 6.48, 6.17
+      ),
 
-  Organic_Acid_mM = c(
-    0.2, 1.8, 4.7, 7.1,
-    0.2, 1.1, 2.8, 4.3,
-    0.2, 1.5, 3.9, 5.8,
+      Organic_Acid_mM = c(
+        0.2, 1.8, 4.7, 7.1,
+        0.2, 1.1, 2.8, 4.3,
+        0.2, 1.5, 3.9, 5.8,
 
-    0.2, 2.4, 6.1, 9.3,
-    0.2, 0.9, 2.1, 3.4,
-    0.2, 1.3, 3.5, 5.2,
+        0.2, 2.4, 6.1, 9.3,
+        0.2, 0.9, 2.1, 3.4,
+        0.2, 1.3, 3.5, 5.2,
 
-    0.2, 1.6, 4.2, 6.4,
-    0.2, 1.4, 3.2, 4.8,
-    0.2, 1.9, 4.9, 7.0
-  )
-)
+        0.2, 1.6, 4.2, 6.4,
+        0.2, 1.4, 3.2, 4.8,
+        0.2, 1.9, 4.9, 7.0
+      )
+    )
 
-challenge_data
-```
+    challenge_data
 
 ---
 
@@ -1795,27 +1608,19 @@ challenge_data
 
 Before plotting, inspect the dataset.
 
-```r
-str(challenge_data)
-```
+    str(challenge_data)
 
 Check the dimensions:
 
-```r
-dim(challenge_data)
-```
+    dim(challenge_data)
 
 View the first observations:
 
-```r
-head(challenge_data)
-```
+    head(challenge_data)
 
 Get a statistical summary:
 
-```r
-summary(challenge_data)
-```
+    summary(challenge_data)
 
 ---
 
@@ -1823,22 +1628,20 @@ summary(challenge_data)
 
 Calculate the average OD600 for each isolate and carbon source.
 
-```r
-challenge_data %>%
-  group_by(
-    Isolate,
-    Carbon_Source
-  ) %>%
-  summarise(
-    mean_OD600 = mean(
-      OD600
-    ),
-    sd_OD600 = sd(
-      OD600
-    ),
-    .groups = "drop"
-  )
-```
+    challenge_data %>%
+      group_by(
+        Isolate,
+        Carbon_Source
+      ) %>%
+      summarise(
+        mean_OD600 = mean(
+          OD600
+        ),
+        sd_OD600 = sd(
+          OD600
+        ),
+        .groups = "drop"
+      )
 
 Ask:
 
@@ -1850,32 +1653,30 @@ Ask:
 
 Create a growth curve showing all three bacterial isolates.
 
-```r
-ggplot(
-  challenge_data,
-  aes(
-    x = Time_h,
-    y = OD600,
-    color = Carbon_Source,
-    group = Carbon_Source
-  )
-) +
-  geom_point(
-    size = 2
-  ) +
-  geom_line(
-    linewidth = 1
-  ) +
-  facet_wrap(
-    ~ Isolate
-  ) +
-  labs(
-    title = "Bacterial Growth Under Different Carbon Sources",
-    x = "Time (hours)",
-    y = "Optical Density (OD600)"
-  ) +
-  theme_classic()
-```
+    ggplot(
+      challenge_data,
+      aes(
+        x = Time_h,
+        y = OD600,
+        color = Carbon_Source,
+        group = Carbon_Source
+      )
+    ) +
+      geom_point(
+        size = 2
+      ) +
+      geom_line(
+        linewidth = 1
+      ) +
+      facet_wrap(
+        ~ Isolate
+      ) +
+      labs(
+        title = "Bacterial Growth Under Different Carbon Sources",
+        x = "Time (hours)",
+        y = "Optical Density (OD600)"
+      ) +
+      theme_classic()
 
 Ask:
 
@@ -1887,35 +1688,31 @@ Ask:
 
 Now focus on the final time point.
 
-```r
-final_time <- challenge_data %>%
-  filter(
-    Time_h == 12
-  )
-```
+    final_time <- challenge_data %>%
+      filter(
+        Time_h == 12
+      )
 
 Plot viable bacterial counts:
 
-```r
-ggplot(
-  final_time,
-  aes(
-    x = Carbon_Source,
-    y = CFU_mL,
-    fill = Isolate
-  )
-) +
-  geom_col(
-    position = "dodge"
-  ) +
-  scale_y_log10() +
-  labs(
-    title = "Viable Bacterial Counts at 12 Hours",
-    x = "Carbon Source",
-    y = "CFU/mL"
-  ) +
-  theme_classic()
-```
+    ggplot(
+      final_time,
+      aes(
+        x = Carbon_Source,
+        y = CFU_mL,
+        fill = Isolate
+      )
+    ) +
+      geom_col(
+        position = "dodge"
+      ) +
+      scale_y_log10() +
+      labs(
+        title = "Viable Bacterial Counts at 12 Hours",
+        x = "Carbon Source",
+        y = "CFU/mL"
+      ) +
+      theme_classic()
 
 Ask:
 
@@ -1927,30 +1724,28 @@ Ask:
 
 Now investigate whether bacterial growth is associated with organic acid production.
 
-```r
-ggplot(
-  challenge_data,
-  aes(
-    x = OD600,
-    y = Organic_Acid_mM,
-    color = Carbon_Source,
-    shape = Isolate
-  )
-) +
-  geom_point(
-    size = 3
-  ) +
-  geom_smooth(
-    method = "lm",
-    se = FALSE
-  ) +
-  labs(
-    title = "Bacterial Growth and Organic Acid Production",
-    x = "Optical Density (OD600)",
-    y = "Organic Acid (mM)"
-  ) +
-  theme_classic()
-```
+    ggplot(
+      challenge_data,
+      aes(
+        x = OD600,
+        y = Organic_Acid_mM,
+        color = Carbon_Source,
+        shape = Isolate
+      )
+    ) +
+      geom_point(
+        size = 3
+      ) +
+      geom_smooth(
+        method = "lm",
+        se = FALSE
+      ) +
+      labs(
+        title = "Bacterial Growth and Organic Acid Production",
+        x = "Optical Density (OD600)",
+        y = "Organic Acid (mM)"
+      ) +
+      theme_classic()
 
 Ask:
 
@@ -1964,29 +1759,27 @@ Bacterial metabolism can change the pH of a culture.
 
 Visualize the relationship between time and pH.
 
-```r
-ggplot(
-  challenge_data,
-  aes(
-    x = Time_h,
-    y = pH,
-    color = Carbon_Source
-  )
-) +
-  geom_point(
-    size = 2
-  ) +
-  geom_line() +
-  facet_wrap(
-    ~ Isolate
-  ) +
-  labs(
-    title = "Changes in Culture pH During Growth",
-    x = "Time (hours)",
-    y = "Culture pH"
-  ) +
-  theme_classic()
-```
+    ggplot(
+      challenge_data,
+      aes(
+        x = Time_h,
+        y = pH,
+        color = Carbon_Source
+      )
+    ) +
+      geom_point(
+        size = 2
+      ) +
+      geom_line() +
+      facet_wrap(
+        ~ Isolate
+      ) +
+      labs(
+        title = "Changes in Culture pH During Growth",
+        x = "Time (hours)",
+        y = "Culture pH"
+      ) +
+      theme_classic()
 
 Ask:
 
@@ -2009,19 +1802,17 @@ Discuss:
 
 Think about the experiment as a biological system:
 
-```text
-Carbon Source
-      ↓
-Bacterial Growth
-      ↓
-Cell Abundance
-      ↓
-Metabolic Activity
-      ↓
-Organic Acid Production
-      ↓
-Culture pH
-```
+    Carbon Source
+          ↓
+    Bacterial Growth
+          ↓
+    Cell Abundance
+          ↓
+    Metabolic Activity
+          ↓
+    Organic Acid Production
+          ↓
+    Culture pH
 
 ---
 
@@ -2051,23 +1842,21 @@ The important idea is:
 
 Different plots reveal different aspects of the same experiment:
 
-```text
-Growth curve
-     ↓
-Temporal response
+    Growth curve
+         ↓
+    Temporal response
 
-CFU plot
-     ↓
-Viable cell abundance
+    CFU plot
+         ↓
+    Viable cell abundance
 
-OD600 vs organic acid
-     ↓
-Growth–metabolism relationship
+    OD600 vs organic acid
+         ↓
+    Growth–metabolism relationship
 
-pH curve
-     ↓
-Physiological change
-```
+    pH curve
+         ↓
+    Physiological change
 
 ---
 
@@ -2077,27 +1866,19 @@ If you finish early, modify one of the plots.
 
 Try changing:
 
-```r
-facet_wrap(~ Isolate)
-```
+    facet_wrap(~ Isolate)
 
 to:
 
-```r
-facet_wrap(~ Carbon_Source)
-```
+    facet_wrap(~ Carbon_Source)
 
 Or change:
 
-```r
-color = Carbon_Source
-```
+    color = Carbon_Source
 
 to:
 
-```r
-color = Isolate
-```
+    color = Isolate
 
 Then ask:
 
@@ -2111,25 +1892,23 @@ Congratulations — we have now completed a simple R-based microbiological analy
 
 Our workflow was:
 
-```text
-              BIOLOGICAL QUESTION
-                       ↓
-                      DATA
-                       ↓
-                IMPORT DATA
-                       ↓
-                INSPECT DATA
-                       ↓
-               SUMMARIZE DATA
-                       ↓
-              EXPLORE PATTERNS
-                       ↓
-               VISUALIZE DATA
-                       ↓
-              STATISTICAL TEST
-                       ↓
-          BIOLOGICAL INTERPRETATION
-```
+    BIOLOGICAL QUESTION
+            ↓
+          DATA
+            ↓
+      IMPORT DATA
+            ↓
+      INSPECT DATA
+            ↓
+     SUMMARIZE DATA
+            ↓
+    EXPLORE PATTERNS
+            ↓
+     VISUALIZE DATA
+            ↓
+     STATISTICAL TEST
+            ↓
+  BIOLOGICAL INTERPRETATION
 
 This workflow is more important than memorizing individual R commands.
 
@@ -2137,68 +1916,60 @@ This workflow is more important than memorizing individual R commands.
 
 # 🧬 From Simple Data to Microbiome Data
 
-The dataset we used today is intentionally simple.
+The datasets we used today are intentionally simple.
 
 Real microbiological datasets can be much more complicated.
 
 For example:
 
-```text
-Today
-Simple biological measurements
-        ↓
-Treatment
-Soil
-pH
-Moisture
-Bacterial abundance
-```
+    Today
+    Simple biological measurements
+            ↓
+    Treatment
+    Soil
+    pH
+    Moisture
+    Bacterial abundance
 
 Later, we may work with:
 
-```text
-Microbiome data
-        ↓
-ASVs
-        ↓
-Taxonomy
-        ↓
-Alpha diversity
-        ↓
-Beta diversity
-        ↓
-Differential abundance
-```
+    Microbiome data
+            ↓
+    ASVs
+            ↓
+    Taxonomy
+            ↓
+    Alpha diversity
+            ↓
+    Beta diversity
+            ↓
+    Differential abundance
 
 And eventually:
 
-```text
-Sequencing reads
-        ↓
-Quality control
-        ↓
-Taxonomic / genomic information
-        ↓
-Biological interpretation
-```
+    Sequencing reads
+            ↓
+    Quality control
+            ↓
+    Taxonomic / genomic information
+            ↓
+    Biological interpretation
 
 The datasets become more complex.
 
 But the basic analytical thinking remains:
 
-```text
-Ask
- ↓
-Organize
- ↓
-Explore
- ↓
-Visualize
- ↓
-Analyze
- ↓
-Interpret
-```
+    Ask
+     ↓
+    Organize
+     ↓
+    Explore
+     ↓
+    Visualize
+     ↓
+    Analyze
+     ↓
+    Interpret
 
 ---
 
@@ -2206,31 +1977,29 @@ Interpret
 
 This workshop is the foundation for the following workshops.
 
-```text
-┌─────────────────────────────────────────────┐
-│ Workshop 1                                  │
-│ Fundamental R Programming                   │
-│                                             │
-│ Data → Explore → Visualize → Statistics     │
-└──────────────────────┬──────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────┐
-│ Workshop 2                                  │
-│ Exploring Microbiomes Using                │
-│ Short-Read Sequencing Data                  │
-└──────────────────────┬──────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────┐
-│ Workshop 3                                  │
-│ Exploring Microbiomes Using                │
-│ Long-Read Sequencing Data                   │
-└──────────────────────┬──────────────────────┘
-                       ↓
-┌─────────────────────────────────────────────┐
-│ Workshop 4                                  │
-│ Microbial Whole-Genome Sequencing Analysis  │
-└─────────────────────────────────────────────┘
-```
+    ┌─────────────────────────────────────────────┐
+    │ Workshop 1                                  │
+    │ Fundamental R Programming                   │
+    │                                             │
+    │ Data → Explore → Visualize → Statistics     │
+    └──────────────────────┬──────────────────────┘
+                           ↓
+    ┌─────────────────────────────────────────────┐
+    │ Workshop 2                                  │
+    │ Exploring Microbiomes Using                │
+    │ Short-Read Sequencing Data                  │
+    └──────────────────────┬──────────────────────┘
+                           ↓
+    ┌─────────────────────────────────────────────┐
+    │ Workshop 3                                  │
+    │ Exploring Microbiomes Using                │
+    │ Long-Read Sequencing Data                   │
+    └──────────────────────┬──────────────────────┘
+                           ↓
+    ┌─────────────────────────────────────────────┐
+    │ Workshop 4                                  │
+    │ Microbial Whole-Genome Sequencing Analysis  │
+    └─────────────────────────────────────────────┘
 
 The purpose of Workshop 1 is **not** to teach microbiome analysis.
 
@@ -2242,38 +2011,36 @@ Instead, it provides the R foundation participants need to understand and manipu
 
 Today we learned that R can help us:
 
-```text
-Organize Data
-      ↓
-Explore Data
-      ↓
-Visualize Data
-      ↓
-Test Questions
-      ↓
-Interpret Results
-```
+    Organize Data
+          ↓
+    Explore Data
+          ↓
+    Visualize Data
+          ↓
+    Test Questions
+          ↓
+    Interpret Results
 
 We also learned several important R functions:
 
-| Function           | Purpose                      |
-| ------------------ | ---------------------------- |
-| `read.csv()`       | Import CSV data              |
-| `head()`           | View first rows              |
-| `dim()`            | Check dimensions             |
-| `names()`          | View column names            |
-| `str()`            | Inspect data structure       |
-| `summary()`        | Summarize data               |
-| `mean()`           | Calculate mean               |
-| `sd()`             | Calculate standard deviation |
-| `filter()`         | Select observations          |
-| `group_by()`       | Group observations           |
-| `summarise()`      | Calculate summaries          |
-| `ggplot()`         | Create visualizations        |
-| `geom_boxplot()`   | Create boxplots              |
-| `geom_histogram()` | Create histograms            |
-| `geom_point()`     | Create scatter plots         |
-| `t.test()`         | Compare two groups           |
+| Function | Purpose |
+| --- | --- |
+| `read.csv()` | Import CSV data |
+| `head()` | View first rows |
+| `dim()` | Check dimensions |
+| `names()` | View column names |
+| `str()` | Inspect data structure |
+| `summary()` | Summarize data |
+| `mean()` | Calculate mean |
+| `sd()` | Calculate standard deviation |
+| `filter()` | Select observations |
+| `group_by()` | Group observations |
+| `summarise()` | Calculate summaries |
+| `ggplot()` | Create visualizations |
+| `geom_boxplot()` | Create boxplots |
+| `geom_histogram()` | Create histograms |
+| `geom_point()` | Create scatter plots |
+| `t.test()` | Compare two groups |
 
 You do **not** need to memorize all of these today.
 
@@ -2289,30 +2056,26 @@ Instead of manually calculating numbers and creating figures, we write code.
 
 For example:
 
-```r
-data %>%
-  group_by(Treatment) %>%
-  summarise(
-    mean_abundance = mean(
-      Bacterial_Abundance,
-      na.rm = TRUE
-    )
-  )
-```
+    data %>%
+      group_by(Treatment) %>%
+      summarise(
+        mean_abundance = mean(
+          Bacterial_Abundance,
+          na.rm = TRUE
+        )
+      )
 
 The same analysis can be:
 
-```text
-Repeated
-    ↓
-Checked
-    ↓
-Modified
-    ↓
-Shared
-    ↓
-Reproduced
-```
+    Repeated
+        ↓
+    Checked
+        ↓
+    Modified
+        ↓
+    Shared
+        ↓
+    Reproduced
 
 This becomes increasingly important as datasets become larger and more complex.
 
@@ -2322,33 +2085,29 @@ This becomes increasingly important as datasets become larger and more complex.
 
 For today's workshop:
 
-```text
-R_Microbiology_Workshop/
-│
-├── data/
-│   └── microbiology_data.csv
-│
-├── scripts/
-│   └── 01_getting_started.R
-│
-├── figures/
-│
-└── results/
-```
+    R_Microbiology_Workshop/
+    │
+    ├── data/
+    │   └── microbiology_data.csv
+    │
+    ├── scripts/
+    │   └── 01_getting_started.R
+    │
+    ├── figures/
+    │
+    └── results/
 
 For a real research project, the structure can be expanded:
 
-```text
-project/
-│
-├── data/
-├── metadata/
-├── scripts/
-├── figures/
-├── tables/
-├── results/
-└── README.md
-```
+    project/
+    │
+    ├── data/
+    ├── metadata/
+    ├── scripts/
+    ├── figures/
+    ├── tables/
+    ├── results/
+    └── README.md
 
 The exact structure may vary.
 
@@ -2392,19 +2151,17 @@ Instead:
 
 The workflow is:
 
-```text
-BIOLOGICAL QUESTION
-        ↓
-      DATA
-        ↓
-    EXPLORE
-        ↓
-   VISUALIZE
-        ↓
-     TEST
-        ↓
-   INTERPRET
-```
+    BIOLOGICAL QUESTION
+            ↓
+          DATA
+            ↓
+        EXPLORE
+            ↓
+       VISUALIZE
+            ↓
+         TEST
+            ↓
+       INTERPRET
 
 ---
 
@@ -2416,39 +2173,35 @@ In the next workshop, we will move from simple microbiological tables to sequenc
 
 The workflow will become:
 
-```text
-Sequencing Reads
-       ↓
-Quality Control
-       ↓
-ASVs / Features
-       ↓
-Taxonomy
-       ↓
-Alpha Diversity
-       ↓
-Beta Diversity
-       ↓
-Statistical Analysis
-       ↓
-Biological Interpretation
-```
+    Sequencing Reads
+           ↓
+    Quality Control
+           ↓
+    ASVs / Features
+           ↓
+    Taxonomy
+           ↓
+    Alpha Diversity
+           ↓
+    Beta Diversity
+           ↓
+    Statistical Analysis
+           ↓
+    Biological Interpretation
 
 The data will become more complex.
 
 But the fundamental principles remain:
 
-```text
-Organize
-   ↓
-Explore
-   ↓
-Visualize
-   ↓
-Analyze
-   ↓
-Interpret
-```
+    Organize
+       ↓
+    Explore
+       ↓
+    Visualize
+       ↓
+    Analyze
+       ↓
+    Interpret
 
 ---
 
