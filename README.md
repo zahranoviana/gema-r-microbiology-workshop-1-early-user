@@ -1218,12 +1218,14 @@ The line represents a fitted linear relationship.
 
 > ⚠️ A trend line does not prove causation.
 
+```
 model <- lm(
   Bacterial_Abundance ~ Moisture,
   data = data
 )
 
 summary(model)
+```
 
 ---
 
@@ -1316,7 +1318,7 @@ ggplot(
   )
 ) +
   geom_histogram(
-    bins = 8
+    bins = 4
   ) +
   theme_classic()
 ```
