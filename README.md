@@ -1326,171 +1326,6 @@ figures/
 └── bacterial_abundance_treatment.png
 ```
 
----
-
-# 🧪 Hands-on Challenge 1
-
-For this challenge, we will work with a **different microbiological dataset**.
-
-Instead of soil, treatment, moisture, and bacterial abundance, we will explore a simple bacterial growth experiment using:
-
-* Carbon source
-* Growth time
-* Optical density (`OD600`)
-* Viable cell count (`CFU_mL`)
-
-First, create the dataset manually:
-
-```r
-challenge_data <- data.frame(
-  Sample = c(
-    "G01", "G02", "G03",
-    "G04", "G05", "G06",
-    "G07", "G08", "G09",
-    "G10", "G11", "G12"
-  ),
-  Carbon_Source = c(
-    "Glucose", "Glucose", "Glucose",
-    "Glucose", "Glucose", "Glucose",
-    "Acetate", "Acetate", "Acetate",
-    "Acetate", "Acetate", "Acetate"
-  ),
-  Time_h = c(
-    0, 2, 4, 6, 8, 10,
-    0, 2, 4, 6, 8, 10
-  ),
-  OD600 = c(
-    0.05, 0.12, 0.31, 0.68, 1.12, 1.48,
-    0.05, 0.08, 0.15, 0.27, 0.44, 0.63
-  ),
-  CFU_mL = c(
-    1.2e6, 2.4e6, 6.8e6,
-    1.5e7, 3.1e7, 4.2e7,
-    1.1e6, 1.6e6, 3.2e6,
-    6.1e6, 1.1e7, 1.8e7
-  )
-)
-
-challenge_data
-```
-
----
-
-## Challenge A — Growth Curve
-
-Plot bacterial growth over time.
-
-```r
-ggplot(
-  challenge_data,
-  aes(
-    x = Time_h,
-    y = OD600,
-    color = Carbon_Source
-  )
-) +
-  geom_point(
-    size = 3
-  ) +
-  geom_line() +
-  labs(
-    title = "Bacterial Growth Under Different Carbon Sources",
-    x = "Time (hours)",
-    y = "Optical Density (OD600)"
-  ) +
-  theme_classic()
-```
-
-Ask:
-
-> **Which carbon source appears to support faster bacterial growth?**
-
----
-
-## Challenge B — CFU Distribution
-
-Compare viable bacterial counts between carbon sources.
-
-```r
-ggplot(
-  challenge_data,
-  aes(
-    x = Carbon_Source,
-    y = CFU_mL,
-    fill = Carbon_Source
-  )
-) +
-  geom_boxplot(
-    alpha = 0.7
-  ) +
-  geom_jitter(
-    width = 0.12,
-    size = 2
-  ) +
-  scale_y_log10() +
-  labs(
-    title = "Viable Bacterial Counts",
-    x = "Carbon Source",
-    y = "CFU/mL"
-  ) +
-  theme_classic()
-```
-
-Ask:
-
-> **Which carbon source is associated with higher viable bacterial counts?**
-
----
-
-## Challenge C — OD600 and CFU Relationship
-
-Explore whether optical density reflects viable cell numbers.
-
-```r
-ggplot(
-  challenge_data,
-  aes(
-    x = OD600,
-    y = CFU_mL,
-    color = Carbon_Source
-  )
-) +
-  geom_point(
-    size = 3
-  ) +
-  geom_smooth(
-    method = "lm",
-    se = FALSE
-  ) +
-  scale_y_log10() +
-  labs(
-    title = "Relationship Between OD600 and Viable Cell Count",
-    x = "Optical Density (OD600)",
-    y = "CFU/mL"
-  ) +
-  theme_classic()
-```
-
-Ask:
-
-> **Does OD600 appear to be associated with viable bacterial cell numbers?**
-
----
-
-## 🧠 Challenge Questions
-
-After creating all three plots, discuss:
-
-1. **Which carbon source appears to support faster growth?**
-2. **Which carbon source has higher viable cell counts?**
-3. **Does OD600 appear to increase with CFU/mL?**
-4. **Why might OD600 and CFU/mL not always show exactly the same pattern?**
-5. **Which plot best describes bacterial growth over time?**
-
-> 💡 **Remember:** OD600 measures optical density, whereas CFU/mL estimates viable culturable cells. These measurements describe different aspects of bacterial growth and may not always change proportionally.
-> 
----
-
 # 🧠 4.11 Choosing the Right Plot
 
 A useful rule of thumb:
@@ -1679,40 +1514,6 @@ The important principle is:
 
 ---
 
-# 🧪 Hands-on Challenge 2
-
-Run:
-
-```r
-test_result <- t.test(
-  Bacterial_Abundance ~ Treatment,
-  data = data
-)
-```
-
-Then:
-
-```r
-test_result
-```
-
-Then:
-
-```r
-test_result$p.value
-```
-
-Now combine the statistical result with your boxplot.
-
-Ask yourself:
-
-1. Which group has higher bacterial abundance?
-2. How large does the difference appear to be?
-3. What is the p-value?
-4. What does the statistical test suggest?
-5. What can we reasonably conclude?
-
----
 
 # 🚀 Section 5 Complete
 
@@ -1858,99 +1659,449 @@ Conclusion
 
 ---
 
-# 🧪 Final Hands-on Challenge
+# 🧪 Hands-on Challenge 1 — Exploring Bacterial Growth and Metabolism
 
-Let's answer our original question:
+For this challenge, we will work with a more complex microbiological dataset from a hypothetical bacterial growth experiment.
 
-> **Does treatment appear to affect bacterial abundance?**
+The experiment investigates how different **carbon sources** affect the growth and metabolic activity of three bacterial isolates.
 
-Use the following workflow.
+The dataset contains:
+
+* Bacterial isolate
+* Carbon source
+* Biological replicate
+* Growth time
+* Optical density (`OD600`)
+* Viable bacterial count (`CFU_mL`)
+* Culture pH
+* Organic acid concentration
+
+Our biological question is:
+
+> **How do bacterial isolates respond differently to different carbon sources over time?**
 
 ---
 
-## Step 1 — Inspect the data
+## 1. Create the Dataset
+
+Create the dataset manually:
 
 ```r
-head(data)
+challenge_data <- data.frame(
+  Isolate = c(
+    "ISO01", "ISO01", "ISO01", "ISO01",
+    "ISO01", "ISO01", "ISO01", "ISO01",
+    "ISO01", "ISO01", "ISO01", "ISO01",
+    "ISO02", "ISO02", "ISO02", "ISO02",
+    "ISO02", "ISO02", "ISO02", "ISO02",
+    "ISO02", "ISO02", "ISO02", "ISO02",
+    "ISO03", "ISO03", "ISO03", "ISO03",
+    "ISO03", "ISO03", "ISO03", "ISO03",
+    "ISO03", "ISO03", "ISO03", "ISO03"
+  ),
 
-str(data)
+  Carbon_Source = c(
+    "Glucose", "Glucose", "Glucose", "Glucose",
+    "Acetate", "Acetate", "Acetate", "Acetate",
+    "Lactate", "Lactate", "Lactate", "Lactate",
+    "Glucose", "Glucose", "Glucose", "Glucose",
+    "Acetate", "Acetate", "Acetate", "Acetate",
+    "Lactate", "Lactate", "Lactate", "Lactate",
+    "Glucose", "Glucose", "Glucose", "Glucose",
+    "Acetate", "Acetate", "Acetate", "Acetate",
+    "Lactate", "Lactate", "Lactate", "Lactate"
+  ),
 
-summary(data)
+  Replicate = c(
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    1, 1, 1, 1,
+    1, 1, 1, 1
+  ),
+
+  Time_h = rep(
+    c(0, 4, 8, 12),
+    9
+  ),
+
+  OD600 = c(
+    0.05, 0.42, 0.91, 1.34,
+    0.05, 0.21, 0.48, 0.72,
+    0.05, 0.31, 0.66, 1.02,
+
+    0.05, 0.55, 1.18, 1.71,
+    0.05, 0.18, 0.39, 0.61,
+    0.05, 0.27, 0.58, 0.91,
+
+    0.05, 0.34, 0.73, 1.08,
+    0.05, 0.29, 0.55, 0.82,
+    0.05, 0.38, 0.81, 1.21
+  ),
+
+  CFU_mL = c(
+    1.1e6, 7.8e6, 2.4e7, 4.1e7,
+    1.0e6, 3.4e6, 9.2e6, 1.5e7,
+    1.2e6, 5.1e6, 1.7e7, 2.9e7,
+
+    1.0e6, 1.2e7, 3.8e7, 6.2e7,
+    1.1e6, 2.8e6, 7.4e6, 1.2e7,
+    1.0e6, 4.2e6, 1.5e7, 2.6e7,
+
+    1.2e6, 6.1e6, 1.9e7, 3.2e7,
+    1.1e6, 4.8e6, 1.3e7, 2.1e7,
+    1.0e6, 6.7e6, 2.1e7, 3.5e7
+  ),
+
+  pH = c(
+    7.00, 6.82, 6.51, 6.23,
+    7.00, 6.91, 6.79, 6.68,
+    7.00, 6.87, 6.61, 6.39,
+
+    7.00, 6.74, 6.29, 5.94,
+    7.00, 6.93, 6.84, 6.75,
+    7.00, 6.90, 6.67, 6.43,
+
+    7.00, 6.85, 6.55, 6.30,
+    7.00, 6.89, 6.72, 6.57,
+    7.00, 6.81, 6.48, 6.17
+  ),
+
+  Organic_Acid_mM = c(
+    0.2, 1.8, 4.7, 7.1,
+    0.2, 1.1, 2.8, 4.3,
+    0.2, 1.5, 3.9, 5.8,
+
+    0.2, 2.4, 6.1, 9.3,
+    0.2, 0.9, 2.1, 3.4,
+    0.2, 1.3, 3.5, 5.2,
+
+    0.2, 1.6, 4.2, 6.4,
+    0.2, 1.4, 3.2, 4.8,
+    0.2, 1.9, 4.9, 7.0
+  )
+)
+
+challenge_data
 ```
 
 ---
 
-## Step 2 — Calculate group summaries
+# 2. Inspect the Dataset
+
+Before plotting, inspect the dataset.
 
 ```r
-data %>%
-  group_by(Treatment) %>%
+str(challenge_data)
+```
+
+Check the dimensions:
+
+```r
+dim(challenge_data)
+```
+
+View the first observations:
+
+```r
+head(challenge_data)
+```
+
+Get a statistical summary:
+
+```r
+summary(challenge_data)
+```
+
+---
+
+# 3. Summarise the Experiment
+
+Calculate the average OD600 for each isolate and carbon source.
+
+```r
+challenge_data %>%
+  group_by(
+    Isolate,
+    Carbon_Source
+  ) %>%
   summarise(
-    mean_abundance = mean(
-      Bacterial_Abundance,
-      na.rm = TRUE
+    mean_OD600 = mean(
+      OD600
     ),
-    sd_abundance = sd(
-      Bacterial_Abundance,
-      na.rm = TRUE
-    )
+    sd_OD600 = sd(
+      OD600
+    ),
+    .groups = "drop"
   )
 ```
 
+Ask:
+
+> **Which isolate appears to grow best on each carbon source?**
+
 ---
 
-## Step 3 — Visualize the groups
+# 4. Plot the Growth Curves
+
+Create a growth curve showing all three bacterial isolates.
 
 ```r
 ggplot(
-  data,
+  challenge_data,
   aes(
-    x = Treatment,
-    y = Bacterial_Abundance
+    x = Time_h,
+    y = OD600,
+    color = Carbon_Source,
+    group = Carbon_Source
   )
 ) +
-  geom_boxplot() +
-  geom_jitter(
-    width = 0.15
+  geom_point(
+    size = 2
+  ) +
+  geom_line(
+    linewidth = 1
+  ) +
+  facet_wrap(
+    ~ Isolate
   ) +
   labs(
-    title = "Bacterial Abundance by Treatment",
-    x = "Treatment",
-    y = "Bacterial Abundance"
+    title = "Bacterial Growth Under Different Carbon Sources",
+    x = "Time (hours)",
+    y = "Optical Density (OD600)"
   ) +
   theme_classic()
 ```
 
+Ask:
+
+> **Do the three bacterial isolates show the same growth response to the carbon sources?**
+
 ---
 
-## Step 4 — Perform the t-test
+# 5. Compare Final Bacterial Abundance
+
+Now focus on the final time point.
 
 ```r
-test_result <- t.test(
-  Bacterial_Abundance ~ Treatment,
-  data = data
-)
+final_time <- challenge_data %>%
+  filter(
+    Time_h == 12
+  )
+```
 
-test_result
+Plot viable bacterial counts:
+
+```r
+ggplot(
+  final_time,
+  aes(
+    x = Carbon_Source,
+    y = CFU_mL,
+    fill = Isolate
+  )
+) +
+  geom_col(
+    position = "dodge"
+  ) +
+  scale_y_log10() +
+  labs(
+    title = "Viable Bacterial Counts at 12 Hours",
+    x = "Carbon Source",
+    y = "CFU/mL"
+  ) +
+  theme_classic()
+```
+
+Ask:
+
+> **Which isolate and carbon source combination produces the highest viable bacterial count?**
+
+---
+
+# 6. Explore the Relationship Between Growth and Metabolism
+
+Now investigate whether bacterial growth is associated with organic acid production.
+
+```r
+ggplot(
+  challenge_data,
+  aes(
+    x = OD600,
+    y = Organic_Acid_mM,
+    color = Carbon_Source,
+    shape = Isolate
+  )
+) +
+  geom_point(
+    size = 3
+  ) +
+  geom_smooth(
+    method = "lm",
+    se = FALSE
+  ) +
+  labs(
+    title = "Bacterial Growth and Organic Acid Production",
+    x = "Optical Density (OD600)",
+    y = "Organic Acid (mM)"
+  ) +
+  theme_classic()
+```
+
+Ask:
+
+> **Does higher bacterial growth appear to be associated with greater organic acid production?**
+
+---
+
+# 7. Explore pH Changes
+
+Bacterial metabolism can change the pH of a culture.
+
+Visualize the relationship between time and pH.
+
+```r
+ggplot(
+  challenge_data,
+  aes(
+    x = Time_h,
+    y = pH,
+    color = Carbon_Source
+  )
+) +
+  geom_point(
+    size = 2
+  ) +
+  geom_line() +
+  facet_wrap(
+    ~ Isolate
+  ) +
+  labs(
+    title = "Changes in Culture pH During Growth",
+    x = "Time (hours)",
+    y = "Culture pH"
+  ) +
+  theme_classic()
+```
+
+Ask:
+
+> **Which carbon source shows the strongest change in culture pH?**
+
+---
+
+# 🧠 8. Final Biological Interpretation
+
+Now combine the information from all four visualizations.
+
+Discuss:
+
+1. **Which isolate grows fastest?**
+2. **Which carbon source supports the highest bacterial abundance?**
+3. **Do all isolates respond similarly to the same carbon source?**
+4. **Is higher bacterial growth associated with greater organic acid production?**
+5. **Does bacterial growth appear to coincide with changes in culture pH?**
+6. **Which bacterial isolate appears to have the strongest metabolic response?**
+
+Think about the experiment as a biological system:
+
+```text
+Carbon Source
+      ↓
+Bacterial Growth
+      ↓
+Cell Abundance
+      ↓
+Metabolic Activity
+      ↓
+Organic Acid Production
+      ↓
+Culture pH
 ```
 
 ---
 
-## Step 5 — Interpret the result
+# 🎯 What Did We Practice?
 
-Complete the following:
+In this challenge, we combined several `ggplot2` concepts:
+
+| Concept | Function |
+| --- | --- |
+| Scatter plot | `geom_point()` |
+| Growth curve | `geom_line()` |
+| Bar plot | `geom_col()` |
+| Trend line | `geom_smooth()` |
+| Multiple panels | `facet_wrap()` |
+| Color | `color =` |
+| Shape | `shape =` |
+| Fill | `fill =` |
+| Logarithmic axis | `scale_y_log10()` |
+| Labels | `labs()` |
+| Grouping | `group_by()` |
+| Summary statistics | `summarise()` |
+| Filtering | `filter()` |
+
+The important idea is:
+
+> **A single biological dataset can be explored from multiple perspectives.**
+
+Different plots reveal different aspects of the same experiment:
 
 ```text
-Bacterial abundance was __________ in the Treatment
-group compared with the Control group.
+Growth curve
+     ↓
+Temporal response
 
-The statistical test gave a p-value of __________.
+CFU plot
+     ↓
+Viable cell abundance
 
-Therefore, the data provide __________ evidence for
-a difference between the groups.
+OD600 vs organic acid
+     ↓
+Growth–metabolism relationship
 
-Biologically, this suggests that __________.
+pH curve
+     ↓
+Physiological change
 ```
+
+---
+
+# 💡 Challenge Extension
+
+If you finish early, modify one of the plots.
+
+Try changing:
+
+```r
+facet_wrap(~ Isolate)
+```
+
+to:
+
+```r
+facet_wrap(~ Carbon_Source)
+```
+
+Or change:
+
+```r
+color = Carbon_Source
+```
+
+to:
+
+```r
+color = Isolate
+```
+
+Then ask:
+
+> **Does changing the visual representation change how easily you can identify the biological pattern?**
 
 ---
 
