@@ -1328,7 +1328,7 @@ figures/
 
 ---
 
-# 🧪 Hands-on Challenge 2
+# 🧪 Hands-on Challenge 1
 
 Create the following three plots.
 
@@ -1585,7 +1585,7 @@ The important principle is:
 
 ---
 
-# 🧪 Hands-on Challenge 3
+# 🧪 Hands-on Challenge 2
 
 Run:
 
